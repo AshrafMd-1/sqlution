@@ -1,93 +1,143 @@
-# Sqlution - SQL Query Editor
+# **Sqlution – SQL Query Editor**
 
 **Live Demo:** [sqlution.netlify.app](https://sqlution.netlify.app)  
-**GitHub Repository:** https://github.com/AshrafMd-1/sqlution
+**GitHub Repository:** [github.com/AshrafMd-1/sqlution](https://github.com/AshrafMd-1/sqlution)
 
-**Sqlution** is a frontend-based SQL query editor that allows users to write, run, and manage SQL queries. It features a
-code editor, AI-powered query generator, schema viewer, and template manager. The project showcases efficient data
-rendering, pagination, and a clean, user-friendly interface.
+## **Overview**
+**Sqlution** is a frontend-based SQL query editor designed to provide an efficient and intuitive experience for writing, executing, and managing SQL queries. It incorporates features such as a **syntax-highlighted code editor, an AI-powered SQL generator, a schema and table viewer, and a template manager**, ensuring seamless query execution and data visualization.
 
-**Tech Stack:**
+This project showcases:
+- **A fully interactive SQL editor with auto-completion and syntax highlighting**
+- **AI-powered SQL query generation for natural language inputs**
+- **Schema and table viewers for easy database exploration**
+- **Efficient pagination for handling large datasets**
+- **Optimized performance with fast load times and smooth user interactions**
 
-- **Framework:** React 18 with Vite
-- **Language:** TypeScript
-- **State Management:** Zustand
-- **Code Editor:** CodeMirror with SQL language support
-- **AI Integration:** `@google/generative-ai` for AI-powered SQL query generation
-- **UI Components:** `react-sliding-pane`, `react-modal`, `react-loader-spinner`
-- **Optimization:** `terser` for minified production build
-- **Styling:** Custom CSS
+## **Technology Stack**
 
-**Features and Functionalities:**
+| Category            | Technology Used |
+|---------------------|----------------|
+| **Frontend Framework** | React 18 with Vite |
+| **Language** | TypeScript |
+| **State Management** | Zustand |
+| **Code Editor** | CodeMirror (SQL language support) |
+| **AI Integration** | Google Generative AI (`@google/generative-ai`) |
+| **UI Components** | `react-sliding-pane`, `react-modal`, `react-loader-spinner` |
+| **Styling** | Custom CSS |
+| **Performance Optimization** | Minified production build using `terser` |
 
-- **SQL Editor:** A CodeMirror-based SQL editor with syntax highlighting, tooltips, and auto-completion.
-- **Query Execution:** Executes SQL queries and displays the results in a table format below the editor.
-- **AI Query Generator:** Generates SQL queries based on natural language prompts using Google’s Generative AI API.
-- **Template Manager:** Allows users to save and reuse SQL snippets. Selected SQL text can be saved as a template and
-  inserted into the editor with a single click.
-- **Table and Schema Viewer:** Displays table contents with pagination and schema details such as column names and data
-  types.
-- **Performance Optimization:** Implements pagination and lazy loading to efficiently handle large datasets.
+## **Features and Functionalities**
 
-**Optimizations for Performance:**
+### 🔹 **SQL Editor**
+- Built using **CodeMirror**, providing syntax highlighting, auto-completion, and an intuitive writing experience.
+- Users can write SQL queries and execute them directly within the interface.
 
-- **Efficient Data Fetching:** Fetches table data dynamically from the `public` folder instead of embedding it,
-  improving load speed.
-- **Pagination:** Renders large datasets in pages to reduce memory usage and enhance performance.
-- **Memoization:** Uses `useCallback` and `useMemo` to prevent unnecessary re-renders.
-- **Minified Production Build:** Utilizes `terser` to minify the code, reducing the build size.
-- **Loading Indicators:** Displays visual loading indicators for better user experience.
+### 🔹 **Query Execution**
+- Queries are processed and displayed in a structured table format.
+- Supports `SELECT *`, `SELECT column_name FROM table_name`, and other common SQL patterns.
+- Includes **pagination** for efficient browsing of results.
 
-**Handling Large Data Sets:**
+### 🔹 **AI-Powered Query Generator**
+- Uses **Google Generative AI** to convert natural language queries into SQL.
+- AI-generated queries are saved for reference and reuse.
 
-- Fetches data dynamically rather than embedding large JSON files.
-- Uses pagination to display large datasets (800+ rows) efficiently, preventing performance issues.
+### 🔹 **Template Manager**
+- Allows users to **save frequently used SQL snippets**.
+- Saved queries can be inserted into the editor with a single click.
 
-**Challenges and Resolutions:**
+### 🔹 **Table and Schema Viewer**
+- Displays **table structures, column names, and data types** dynamically.
+- Provides a structured view of available database tables.
 
-- **SQL Execution Logic:**
-    - Extracting column names between `SELECT` and `FROM` to display results.
-    - Supports `SELECT *` queries by automatically displaying all columns.
-- **Data Rendering:**
-    - Used pagination and lazy loading to reduce the load time when displaying large tables.
-- **Optimization:**
-    - Minified the code and optimized rendering to enhance performance.
+### 🔹 **Performance Optimization**
+- **Efficient data fetching**: Fetches table data dynamically from JSON files instead of embedding it, improving load times.
+- **Pagination**: Ensures smooth handling of large datasets while maintaining responsiveness.
+- **Code optimization**: Uses **memoization (`useCallback`, `useMemo`)** to prevent unnecessary re-renders.
+- **Minified production build**: Reduces bundle size for faster execution.
+- **Loading indicators**: Visual cues enhance user experience during data processing.
 
-**Performance Metrics:**
+## **Challenges and Solutions**
 
-- **Page Load Times:**
-        ![img_1.png](img_1.png)
-        
-        - 5 requests
-        - 693 B transferred
-        - 719 kB resources loaded
-        - Finish: 437 ms
-        - DOMContentLoaded: 373 ms
-        - Load: 373 ms
+| Challenge | Solution |
+|-----------|----------|
+| **Frontend-Only SQL Execution** | Implemented a logic to parse SQL queries and extract column names dynamically. |
+| **Handling Large Datasets** | Implemented pagination to prevent browser crashes and ensure smooth scrolling. |
+| **Performance Optimization** | Minified the code and optimized component re-renders for better responsiveness. |
 
-- **Lighthouse Scores:**
-        ![img.png](img.png)
-        - Performance: 99
-        - Accessibility: 100
-        - Best Practices: 100
-        - SEO: 82
+## **Performance Metrics**
 
-**Deployment:**
+### **Page Load Statistics:**
 
+![img_1.png](imgs/img_1.png)
+
+
+
+| Metric | Value |
+|--------|-------|
+| **Number of Requests** | 5 |
+| **Data Transferred** | 693 B |
+| **Resources Loaded** | 719 kB |
+| **Finish Time** | 437 ms |
+| **DOMContentLoaded** | 373 ms |
+| **Load Time** | 373 ms |
+
+### **Lighthouse Performance Scores:**
+
+![img.png](imgs/img.png)
+
+
+| Metric | Score |
+|--------|-------|
+| **Performance** | 99 |
+| **Accessibility** | 100 |
+| **Best Practices** | 100 |
+| **SEO** | 82 |
+
+## **Deployment**
 - **Hosting:** Netlify
 - **Live Demo:** [sqlution.netlify.app](https://sqlution.netlify.app)
 
-**Installation and Running Locally:**
+## **Installation & Running Locally**
 
-1. Clone the repository:  
-   `git clone <GitHub-repo-link>`
-2. Navigate to the project directory:  
-   `cd sqlution`
-3. Install dependencies:  
-   `npm install`
-4. Run the app locally:  
-   `npm run dev`
-5. Build for production:  
-   `npm run build`
+1️⃣ **Clone the repository**
+```sh
+git clone https://github.com/AshrafMd-1/sqlution.git
+```  
+2️⃣ **Navigate to the project directory**
+```sh
+cd sqlution
+```  
+3️⃣ **Install dependencies**
+```sh
+npm install
+```  
+4️⃣ **Run the application locally**
+```sh
+npm run dev
+```  
+5️⃣ **Build for production**
+```sh
+npm run build
+```  
 
-**Images:**
+---
+
+## **Screenshots**
+
+![SQL Editor](imgs/img_2.png)
+
+![AI Query Generator](imgs/img_3.png)
+
+![Schema Viewer](imgs/img_4.png)
+
+![Lighthouse Performance](imgs/img_5.png)
+
+![img_6.png](imgs/img_6.png)
+
+![img_7.png](imgs/img_7.png)
+
+---
+
+### **Conclusion**
+
+**Sqlution** is a robust frontend-based SQL query editor designed to enhance the SQL query writing and execution process. The project successfully demonstrates **React best practices, AI integration, performance optimizations, and user-friendly design**.
