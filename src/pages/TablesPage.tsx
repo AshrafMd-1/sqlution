@@ -1,6 +1,6 @@
 import {useParams} from "react-router";
 import {useState} from "react";
-import "../styles/tablesPage/tablesPage.css";
+import "../styles/tablesPage/TablesPage.css";
 import TableComponent from "../components/TableDisplayer.tsx";
 import {DNA} from "react-loader-spinner";
 import useFetch from "../hooks/useFetch";
