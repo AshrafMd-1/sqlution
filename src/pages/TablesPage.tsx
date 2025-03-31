@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import "../styles/tablesPage/TablesPage.css";
 import TableComponent from "../components/TableDisplayer.tsx";
 import {DNA} from "react-loader-spinner";
@@ -25,6 +25,11 @@ const TablesPage = () => {
       name ? `/data/${name}.json` : null,
   );
 
+  // Reset pagination when table name changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [name]);
+
   if (!name) {
     return (
         <div className="tables-msg-container">
@@ -37,7 +42,7 @@ const TablesPage = () => {
       <div
           className={
               "tables-page-container " +
-              (isOpen ? " .sidebar-open" : ".sidebar-closed")
+              (isOpen ? "sidebar-open" : "sidebar-closed")
           }
       >
         {loading ? (
