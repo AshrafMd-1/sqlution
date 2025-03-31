@@ -6,11 +6,18 @@ import { useNavigate } from "react-router";
 interface Props {
   url: string[];
   iconElements: React.ReactNode[];
-  isOpen: () => void;
-  open: boolean;
+  toggleSidebar: () => void;
+  openSidebar: () => void;
+  isOpen: boolean;
 }
 
-const NavbarSidebarMenu = ({ url, iconElements, isOpen, open }: Props) => {
+const NavbarSidebarMenu = ({
+  url,
+  iconElements,
+  isOpen,
+  toggleSidebar,
+  openSidebar,
+}: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -22,15 +29,18 @@ const NavbarSidebarMenu = ({ url, iconElements, isOpen, open }: Props) => {
             key={index}
             className={
               location.pathname.includes(url[index])
-                ? open
+                ? isOpen
                   ? "navbar-sidebar-menu-active"
                   : "navbar-sidebar-menu-normal"
                 : "navbar-sidebar-menu-normal"
             }
             onClick={() => {
               if (location.pathname.includes(url[index])) {
-                isOpen();
+                toggleSidebar();
               } else {
+                if (!isOpen) {
+                  openSidebar();
+                }
                 navigate(url[index]);
               }
             }}

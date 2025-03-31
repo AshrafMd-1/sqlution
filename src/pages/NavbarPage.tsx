@@ -9,11 +9,11 @@ import { FaTableList } from "react-icons/fa6";
 import { Outlet } from "react-router";
 import Sidebar from "../components/sidebar.tsx";
 import NavbarSidebarMenu from "../components/NavbarSidebarMenu.tsx";
-import { useState } from "react";
+import useSidebarStore from "../state/useSidebarStore.ts";
 
 const NavbarPage = () => {
   const { theme, toggleTheme } = useTheme();
-  const [open, setOpen] = useState(true);
+  const { isOpen, toggleSidebar, openSidebar } = useSidebarStore();
 
   return (
     <div className="navbar">
@@ -43,18 +43,21 @@ const NavbarPage = () => {
       <div className="main-body">
         <div className="navbar-sidebar">
           <NavbarSidebarMenu
-            open={open}
+            isOpen={isOpen}
             url={["sql", "table", "schema"]}
             iconElements={[
               <LuSquareTerminal />,
               <FaTableList />,
               <MdOutlineSchema />,
             ]}
-            isOpen={() => {
-              setOpen(!open);
+            toggleSidebar={() => {
+              toggleSidebar();
+            }}
+            openSidebar={() => {
+              openSidebar();
             }}
           />
-          <Sidebar isOpen={open} />
+          <Sidebar isOpen={isOpen} />
         </div>
 
         <Outlet />

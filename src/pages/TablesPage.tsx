@@ -49,10 +49,14 @@ const TablesPage = () => {
   if (!data) return <p className="loading-message">Loading...</p>;
 
   return (
-    <div className="tables-page-container">
+    <div
+      className={`
+    .tables-page-container ${data.data.length === 0 ? "no-data" : ""}`}
+    >
       <TableComponent
         tableName={name}
         data={data.data}
+        columns={Object.keys(data.data[0] || {})}
         totalRows={data.count}
         currentPage={currentPage}
         rowsPerPage={rowsPerPage}

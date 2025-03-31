@@ -65,22 +65,22 @@
 }
 
 
-.schema-msg-container,.schema-err-msg-container{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 100px);
+.schema-msg-container, .schema-err-msg-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
 }
 
-.schema-msg-container p{
-    font-size: 1.5rem;
-    color: var(--schema-msg-color);
+.schema-msg-container p {
+  font-size: 1.5rem;
+  color: var(--schema-msg-color);
 }
 
-.schema-err-msg-container p{
-    font-size: 2rem;
-    color: var(--schema-err-msg-color);
+.schema-err-msg-container p {
+  font-size: 2rem;
+  color: var(--schema-err-msg-color);
 }
 
 
