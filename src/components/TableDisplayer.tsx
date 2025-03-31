@@ -57,18 +57,13 @@ const TableDisplayer = ({
           <h2 className="table-title">{tableName}</h2>
           <select
               className="rows-per-page-selector"
-              value={rowsPerPage === 0 ? "all" : rowsPerPage}
-              onChange={(e) =>
-                  onRowsPerPageChange(
-                      e.target.value === "all" ? 0 : parseInt(e.target.value),
-                  )
-              }
+              value={rowsPerPage}
+              onChange={(e) => onRowsPerPageChange(parseInt(e.target.value))}
           >
             <option value="10">10</option>
             <option value="30">30</option>
             <option value="50">50</option>
             <option value="90">90</option>
-            <option value="all">All</option>
           </select>
         </div>
 
