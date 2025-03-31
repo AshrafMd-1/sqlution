@@ -14,7 +14,9 @@ html, body {
   overflow: hidden;
 }
 
+
 [data-theme='light'] {
+  --body-background: #f3f3f3;
   --navbar-top-bg-color: #dddddd;
   --navbar-top-text-color: #464646;
   --navbar-top-bg-color-hover: #d2d2d2;
@@ -25,19 +27,73 @@ html, body {
   --navbar-sidebar-active-border-color: #dddddd;
   --navbar-sidebar-active-fg-color-active: #ffffff;
 
+  /* Sidebar Colors */
   --sidebar-bg-color: #f3f3f3;
   --sidebar-text-color: #616161;
   --sidebar-icon-color: #424242;
   --sidebar-bg-color-hover: #f0f0f0;
   --sidebar-selected-bg-color: #e4e6f1;
 
+  /* Tables Page Navigation */
   --tables-page-nav-bg-color: #f3f3f3;
+
+  /* Schema Page Colors */
+  --schema-bg-color: #ffffff;
+  --schema-text-color: #333;
+  --schema-title-color: #2c3e50;
+  --schema-section-title-color: #34495e;
+  --schema-table-header-bg: #f5f5f5;
+  --schema-table-header-text: #2c3e50;
+  --schema-table-row-even-bg: #f9f9f9;
+  --schema-table-row-odd-bg: #ffffff;
+  --schema-table-row-hover-bg: #f1f1f1;
+  --schema-table-border-color: #ddd;
+  --schema-table-shadow: rgba(0, 0, 0, 0.1);
+  --schema-msg-color: #616161;
+  --schema-err-msg-color: #c26c6c;
 }
 
+
 [data-theme='dark'] {
+  --body-background: #171c28;
   --navbar-top-bg-color: #171c28;
-  --navbar-top-text-color: #d2d8de;
+  --navbar-top-text-color: #8695b7;
   --navbar-top-bg-color-hover: #2c3039;
+
+  --navbar-sidebar-bg-color: #171c28;
+  --navbar-sidebar-text-color: #444d61;
+  --navbar-sidebar-fg-color-hover: #8695b7;
+  --navbar-sidebar-active-border-color: #8695b7;
+  --navbar-sidebar-active-fg-color-active: #8695b7;
+
+  /* Sidebar Colors */
+  --sidebar-bg-color: #171c28;
+  --sidebar-text-color: #707a80;
+  --sidebar-icon-color: #bcc5c5;
+  --sidebar-bg-color-hover: #1c2230;
+  --sidebar-selected-bg-color: #1c2230;
+
+  /* Tables Page Navigation */
+  --tables-page-nav-bg-color: #f3f3f3;
+
+  /* Schema Page Colors */
+  --schema-bg-color: #011627;
+  --schema-text-color: #5d686f;
+  --schema-title-color: #c9dce2;
+  --schema-section-title-color: #cbccbe;
+  --schema-table-header-bg: #052846;
+  --schema-table-header-text: #cbccc6;
+  --schema-table-row-even-bg: #071d2f;
+  --schema-table-row-odd-bg: #011627;
+  --schema-table-row-hover-bg: #12293b;
+  --schema-table-border-color: #052846;
+  --schema-table-shadow: rgba(255, 255, 255, 0.1);
+  --schema-msg-color: #cccccc;
+  --schema-err-msg-color: #ff6b6b;
+}
+
+body {
+  background-color: var(--body-background);
 }
 
 

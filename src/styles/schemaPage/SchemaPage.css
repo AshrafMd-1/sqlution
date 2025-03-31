@@ -3,7 +3,8 @@
   width: 100%;
   height: calc(100vh - 50px);
   font-family: Arial, sans-serif;
-  color: #333;
+  color: var(--schema-text-color);
+  background-color: var(--schema-bg-color);
   overflow: auto;
 }
 
@@ -12,7 +13,7 @@
   text-transform: capitalize;
   text-align: center;
   margin-bottom: 30px;
-  color: #2c3e50;
+  color: var(--schema-title-color);
 }
 
 .schema-description-section, .schema-columns-section {
@@ -22,22 +23,22 @@
 .schema-description-title, .schema-columns-title {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #34495e;
+  color: var(--schema-section-title-color);
 }
 
 .schema-description-table, .schema-columns-table {
   width: 50%;
   border-collapse: collapse;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px var(--schema-table-shadow);
   overflow: hidden;
   margin-bottom: 20px;
 }
 
 .schema-description-table th,
 .schema-columns-table th {
-  background-color: #f5f5f5;
-  color: #2c3e50;
+  background-color: var(--schema-table-header-bg);
+  color: var(--schema-table-header-text);
   font-weight: 600;
   padding: 12px 15px;
   text-align: left;
@@ -46,18 +47,47 @@
 .schema-description-table td,
 .schema-columns-table td {
   padding: 12px 15px;
-  border-bottom: 1px solid #ddd;
+  color: var(--schema-table-header-text);
+  border-bottom: 1px solid var(--schema-table-border-color);
 }
 
 .schema-columns-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--schema-table-row-even-bg);
 }
 
 .schema-columns-table tbody tr:nth-child(odd) {
-  background-color: #ffffff;
+  background-color: var(--schema-table-row-odd-bg);
 }
 
 .schema-columns-table tbody tr:hover {
-  background-color: #f1f1f1;
+  background-color: var(--schema-table-row-hover-bg);
   transition: background 0.3s;
+}
+
+
+.schema-msg-container,.schema-err-msg-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+}
+
+.schema-msg-container p{
+    font-size: 1.5rem;
+    color: var(--schema-msg-color);
+}
+
+.schema-err-msg-container p{
+    font-size: 2rem;
+    color: var(--schema-err-msg-color);
+}
+
+
+.loader-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 100px);
 }

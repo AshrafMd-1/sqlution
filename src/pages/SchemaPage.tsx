@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
+import useFetch from "../hooks/useFetch";
 import "./../styles/schemaPage/schemaPage.css";
+import { DNA } from "react-loader-spinner";
 
 interface TableMetadata {
   metadata: {
@@ -14,35 +15,38 @@ interface TableMetadata {
 
 const SchemaPage = () => {
   const { name } = useParams();
-  const [data, setData] = useState<TableMetadata | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/data/${name}_metadata.json`);
-        if (!response.ok) {
-          throw new Error("File not found");
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error("Error fetching JSON:", error);
-        setError("Failed to load data.");
-      }
-    };
-
-    if (name) {
-      fetchData();
-    }
-  }, [name]);
-
-  if (name === undefined) {
-    return <p>Click on a table to see its schema</p>;
+  const url = name ? `/data/${name}_metadata.json` : null;
+  const { data, error, loading } = useFetch<TableMetadata>(url);
+  console.log(error, data, loading);
+  if (!name)
+    return (
+      <div className="schema-msg-container">
+        <p>Please select a table from the left menu to view its schema.</p>
+      </div>
+    );
+  if (loading) {
+    return (
+      <div className="loader-container">
+        <DNA visible={true} height="120" width="120" ariaLabel="dna-loading" />
+      </div>
+    );
   }
 
-  if (error) return <p>{error}</p>;
-  if (!data) return <p>Loading...</p>;
+  if (!data && error) {
+    return (
+      <div className="schema-err-msg-container">
+        <p>⚠️ {error}</p>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="schema-msg-container">
+        <p>No data available</p>
+      </div>
+    );
+  }
 
   return (
     <div className="schema-page">
@@ -75,7 +79,7 @@ const SchemaPage = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.metadata.columns.map((col, index) => (
+            {data.metadata.columns.map((col, index) => (
               <tr key={index}>
                 <td>{col.name}</td>
                 <td>{col.type}</td>

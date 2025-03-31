@@ -11,8 +11,8 @@
   flex-direction: column;
   list-style: none;
   padding: 0;
-  margin: 0;
   gap: 20px;
+  margin: 20px 0 0;
 }
 
 .navbar-sidebar-menu ul li {

@@ -8,7 +8,7 @@ interface SqlEditorProps {
   onSubmit: (query: string) => void;
 }
 
-const SqlEditor = ({ onSubmit, onSelect }: SqlEditorProps) => {
+const SqlEditor = ({ onSubmit }: SqlEditorProps) => {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const viewRef = useRef<EditorView | null>(null);
   const [selectedText, setSelectedText] = useState<string>("");
@@ -42,7 +42,7 @@ const SqlEditor = ({ onSubmit, onSelect }: SqlEditorProps) => {
         view.destroy();
       };
     }
-  }, [onSelect]);
+  }, []);
 
   const handleSubmit = () => {
     if (viewRef.current) {
