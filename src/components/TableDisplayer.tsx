@@ -27,19 +27,6 @@ const TableDisplayer = ({
   columns,
 }: TableProps) => {
   const [visibleColumns, setVisibleColumns] = useState<string[]>([]);
-  console.log(
-    "TableDisplayer - Data:",
-    data,
-    "Columns:",
-    columns,
-    "Total Rows:",
-    totalRows,
-    "Current Page:",
-    currentPage,
-    "Rows Per Page:",
-    rowsPerPage,
-    visibleColumns,
-  );
 
   useEffect(() => {
     if (data.length > 0) {

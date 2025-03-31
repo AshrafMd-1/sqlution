@@ -17,7 +17,7 @@ const SchemaPage = () => {
   const { name } = useParams();
   const url = name ? `/data/${name}_metadata.json` : null;
   const { data, error, loading } = useFetch<TableMetadata>(url);
-  console.log(error, data, loading);
+
   if (!name)
     return (
       <div className="schema-msg-container">

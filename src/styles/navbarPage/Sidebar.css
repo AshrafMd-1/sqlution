@@ -6,8 +6,27 @@
   padding: 1px;
 }
 
+.sidebar-msg-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-msg-text {
+  font-size: 1.2rem;
+  color: var(--sidebar-text-color);
+  margin: 10px 0;
+}
+
+.sidebar-err-msg-text {
+  font-size: 1rem;
+  color: var(--sidebar-err-msg-color);
+  margin: 10px 0;
+}
+
 .sidebar-header {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 10px 0;
   text-align: center;
 }

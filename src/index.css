@@ -34,8 +34,18 @@ html, body {
   --sidebar-bg-color-hover: #f0f0f0;
   --sidebar-selected-bg-color: #e4e6f1;
 
-  /* Tables Page Navigation */
-  --tables-page-nav-bg-color: #f3f3f3;
+  /* Tables Page  */
+  --table-bg-color: #f1f3f5;
+  --table-border-color: #e0e0e0;
+  --table-text-color: #555;
+  --table-cell-text-color: #444;
+  --table-hover-bg-color: #f0f0f0;
+  --table-btn-bg-color: #007bff;
+  --table-btn-hover-bg-color: #0056b3;
+  --table-btn-disabled-bg: #ccc;
+  --table-selector-bg: #f1f3f5;
+  --table-selector-hover-bg: #e0e0e0;
+  --table-pagination-text-color: #fff;
 
   /* Schema Page Colors */
   --schema-bg-color: #ffffff;
@@ -72,9 +82,21 @@ html, body {
   --sidebar-icon-color: #bcc5c5;
   --sidebar-bg-color-hover: #1c2230;
   --sidebar-selected-bg-color: #1c2230;
+  --sidebar-msg-color: #cccccc;
+  --sidebar-err-msg-color: #ff6b6b;
 
   /* Tables Page Navigation */
-  --tables-page-nav-bg-color: #f3f3f3;
+  --tables-bg-color: #f1f3f5;
+  --tables-border-color: #e0e0e0;
+  --tables-text-color: #555;
+  --tables-cell-text-color: #444;
+  --tables-hover-bg-color: #f0f0f0;
+  --tables-btn-bg-color: #007bff;
+  --tables-btn-hover-bg-color: #0056b3;
+  --tables-btn-disabled-bg: #ccc;
+  --tables-selector-bg: #f1f3f5;
+  --tables-selector-hover-bg: #e0e0e0;
+  --tables-pagination-text-color: #fff;
 
   /* Schema Page Colors */
   --schema-bg-color: #011627;
@@ -90,6 +112,8 @@ html, body {
   --schema-table-shadow: rgba(255, 255, 255, 0.1);
   --schema-msg-color: #cccccc;
   --schema-err-msg-color: #ff6b6b;
+
+
 }
 
 body {

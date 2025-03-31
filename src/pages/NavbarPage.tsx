@@ -7,9 +7,9 @@ import { GoRepoTemplate } from "react-icons/go";
 import { LuSquareTerminal } from "react-icons/lu";
 import { FaTableList } from "react-icons/fa6";
 import { Outlet } from "react-router";
-import Sidebar from "../components/sidebar.tsx";
+import Sidebar from "../components/Sidebar.tsx";
 import NavbarSidebarMenu from "../components/NavbarSidebarMenu.tsx";
-import useSidebarStore from "../state/useSidebarStore.ts";
+import useSidebarStore from "../store/useSidebarStore.ts";
 
 const NavbarPage = () => {
   const { theme, toggleTheme } = useTheme();

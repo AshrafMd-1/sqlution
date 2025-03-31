@@ -1,8 +1,10 @@
 import { useParams } from "react-router";
-import { useEffect, useState } from "react";
-
-import "./../styles/tablesPage/tablesPage.css";
+import { useState } from "react";
+import "../styles/tablesPage/tablesPage.css";
 import TableComponent from "../components/TableDisplayer.tsx";
+import { DNA } from "react-loader-spinner";
+import useFetch from "../hooks/useFetch";
+import useSidebarStore from "../store/useSidebarStore.ts";
 
 interface TableRow {
   [key: string]: string | number | null;
@@ -15,54 +17,59 @@ interface TableData {
 
 const TablesPage = () => {
   const { name } = useParams();
-  const [data, setData] = useState<TableData | null>(null);
-  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(30);
+  const { isOpen } = useSidebarStore();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/data/${name}.json`);
-        if (!response.ok) {
-          throw new Error("File not found");
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-        setCurrentPage(1);
-      } catch (error) {
-        console.error("Error fetching JSON:", error);
-        setError("Failed to load data.");
-      }
-    };
-
-    if (name) {
-      fetchData();
-    }
-  }, [name]);
+  // Fetch table data using the useFetch hook
+  const { data, error, loading } = useFetch<TableData>(
+    name ? `/data/${name}.json` : null,
+  );
 
   if (!name) {
-    return <p className="info-message">Click on a table to see its data</p>;
+    return (
+      <div className="tables-msg-container">
+        <p>Please select a table from the left menu to view its schema.</p>
+      </div>
+    );
   }
-
-  if (error) return <p className="error-message">{error}</p>;
-  if (!data) return <p className="loading-message">Loading...</p>;
 
   return (
     <div
-      className={`
-    .tables-page-container ${data.data.length === 0 ? "no-data" : ""}`}
+      className={
+        "tables-page-container " +
+        (isOpen ? " .sidebar-open" : ".sidebar-closed")
+      }
     >
-      <TableComponent
-        tableName={name}
-        data={data.data}
-        columns={Object.keys(data.data[0] || {})}
-        totalRows={data.count}
-        currentPage={currentPage}
-        rowsPerPage={rowsPerPage}
-        onPageChange={setCurrentPage}
-        onRowsPerPageChange={setRowsPerPage}
-      />
+      {loading ? (
+        <div className="loader-container">
+          <DNA
+            visible={true}
+            height="120"
+            width="120"
+            ariaLabel="dna-loading"
+          />
+        </div>
+      ) : error ? (
+        <div className="tables-err-msg-container">
+          <p>⚠️ {error}</p>
+        </div>
+      ) : !data ? (
+        <div className="tables-msg-container">
+          <p>No data available</p>
+        </div>
+      ) : (
+        <TableComponent
+          tableName={name}
+          data={data.data}
+          columns={Object.keys(data.data[0] || {})}
+          totalRows={data.count}
+          currentPage={currentPage}
+          rowsPerPage={rowsPerPage}
+          onPageChange={setCurrentPage}
+          onRowsPerPageChange={setRowsPerPage}
+        />
+      )}
     </div>
   );
 };

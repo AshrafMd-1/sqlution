@@ -3,14 +3,14 @@
   flex-direction: column;
   background: white;
   box-shadow: none;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--tables-page-bg-color);
   border-radius: 8px;
 }
 
 .table-title {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #333;
+  color: var(--tables-page-nav-text-color);
   text-transform: capitalize;
 }
 
@@ -19,21 +19,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background: #fff;
-  border-bottom: 1px solid #e0e0e0;
+  background: var(--tables-page-bg-color);
+  border-bottom: 1px solid var(--tables-page-nav-border-color);
 }
 
 .rows-per-page-selector {
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--table-border-color);
   border-radius: 5px;
-  background: #f1f3f5;
+  background: var(--table-selector-bg);
   cursor: pointer;
   transition: all 0.3s;
 }
 
 .rows-per-page-selector:hover {
-  background: #e0e0e0;
+  background: var(--table-selector-hover-bg);
 }
 
 .table-wrapper {
@@ -49,15 +49,15 @@
 }
 
 .table-header {
-  background: #f1f3f5;
+  background: var(--table-bg-color);
   font-weight: 600;
-  color: #555;
+  color: var(--table-text-color);
   text-align: left;
 }
 
 .table-header th {
   padding: 12px 15px;
-  border-bottom: 2px solid #e0e0e0;
+  border-bottom: 2px solid var(--table-border-color);
 }
 
 .table-row {
@@ -65,13 +65,13 @@
 }
 
 .table-row:hover {
-  background: #f0f0f0;
+  background: var(--table-hover-bg-color);
 }
 
 .table-cell {
   padding: 12px 15px;
-  border-bottom: 1px solid #e0e0e0;
-  color: #444;
+  border-bottom: 1px solid var(--table-border-color);
+  color: var(--table-cell-text-color);
 }
 
 .pagination {
@@ -80,15 +80,15 @@
   align-items: center;
   box-sizing: border-box;
   height: 60px;
-  background: #f1f3f5;
-  border-top: 1px solid #e0e0e0;
+  background: var(--table-bg-color);
+  border-top: 1px solid var(--table-border-color);
 }
 
 .pagination-button {
   padding: 10px 20px;
   margin: 0 5px;
-  background: #007bff;
-  color: #fff;
+  background: var(--table-btn-bg-color);
+  color: var(--table-pagination-text-color);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -96,16 +96,16 @@
 }
 
 .pagination-button:hover {
-  background: #0056b3;
+  background: var(--table-btn-hover-bg-color);
 }
 
 .pagination-button:disabled {
-  background: #ccc;
+  background: var(--table-btn-disabled-bg);
   cursor: not-allowed;
 }
 
 .pagination-info {
   margin: 0 15px;
   font-size: 16px;
-  color: #555;
+  color: var(--table-text-color);
 }
