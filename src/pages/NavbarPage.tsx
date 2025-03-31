@@ -1,4 +1,4 @@
-import "./../styles/navbarPage/NavbarPage.css";
+import "../styles/navbarPage/NavbarPage.css";
 import {SiMicroeditor} from "react-icons/si";
 import {MdOutlineSchema} from "react-icons/md";
 import {LuSquareTerminal} from "react-icons/lu";

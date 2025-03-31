@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useMemo, useState} from "react";
 import {useLocation} from "react-router-dom";
 import SqlEditor from "../components/SqlEditor.tsx";
-import "./../styles/sqlPage/SqlPage.css";
+import "../styles/sqlPage/SqlPage.css";
 import TableDisplayer from "../components/TableDisplayer.tsx";
 import {sqlCommands} from "../utils/sqlEditorMisc.ts";
 import useFetch from "../hooks/useFetch.ts";
@@ -120,7 +120,7 @@ const SqlPage = () => {
                     />
                   </div>
               ) : (
-                  (commandError || error ) ? (
+                  (commandError || error) ? (
                       <div className="error-container">
                         <h2 className="error-title">⚠️ Failed to load table</h2>
                       </div>

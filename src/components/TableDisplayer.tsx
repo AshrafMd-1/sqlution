@@ -1,4 +1,4 @@
-import "./../styles/tablesPage/TableDisplayer.css";
+import "../styles/tablesPage/TableDisplayer.css";
 import {useEffect, useState} from "react";
 
 interface TableRow {
