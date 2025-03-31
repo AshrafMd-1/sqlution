@@ -21,7 +21,7 @@
 
 .sidebar-err-msg-text {
   font-size: 1rem;
-  color: var(--sidebar-err-msg-color);
+  color: #da5151;
   margin: 10px 0;
 }
 

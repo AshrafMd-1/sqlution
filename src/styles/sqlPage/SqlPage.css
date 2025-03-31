@@ -1,6 +1,22 @@
 .sql-page {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100vw - 50px);
   height: 100%;
+}
+
+.sql-sidebar-open {
+  width: calc(100vw - 190px - 50px);
+}
+
+.sql-sidebar-close {
+  width: calc(100vw - 50px);
+}
+
+.sql-table-container {
+  width: 100%;
+  height: calc(100vh - 40vh - 50px);
+  overflow: auto;
+  background-color: var(--table-bg-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }

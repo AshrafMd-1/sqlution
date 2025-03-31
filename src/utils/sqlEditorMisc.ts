@@ -1,5 +1,5 @@
 const sqlCommands = (
-  command: string,
+    command: string,
 ): { columns: string[]; table: string | null } => {
   const cleanedCommand = command.trim().replace(/\s+/g, " ").toLowerCase();
 
@@ -15,12 +15,12 @@ const sqlCommands = (
   if (selectMatch) {
     const columnsPart = selectMatch[1].trim();
     result.columns =
-      columnsPart === "*"
-        ? ["*"]
-        : columnsPart.split(",").map((col) => col.trim());
+        columnsPart === "*"
+            ? ["*"]
+            : columnsPart.split(",").map((col) => col.trim());
   }
 
   return result;
 };
 
-export { sqlCommands };
+export {sqlCommands};

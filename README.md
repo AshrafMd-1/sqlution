@@ -1,1 +1,1 @@
-# SQUEAL (SQL Frontend Project)
+# Sqlution (SQL Frontend Project)

@@ -1,5 +1,5 @@
 import "./../styles/tablesPage/TableDisplayer.css";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 interface TableRow {
   [key: string]: string | number | null;
@@ -17,15 +17,15 @@ interface TableProps {
 }
 
 const TableDisplayer = ({
-  tableName,
-  data,
-  totalRows,
-  currentPage,
-  rowsPerPage,
-  onPageChange,
-  onRowsPerPageChange,
-  columns,
-}: TableProps) => {
+                          tableName,
+                          data,
+                          totalRows,
+                          currentPage,
+                          rowsPerPage,
+                          onPageChange,
+                          onRowsPerPageChange,
+                          columns,
+                        }: TableProps) => {
   const [visibleColumns, setVisibleColumns] = useState<string[]>([]);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const TableDisplayer = ({
         setVisibleColumns(keys);
       } else {
         const filteredColumns = keys.filter((key) =>
-          lowerCaseColumns.includes(key.toLowerCase()),
+            lowerCaseColumns.includes(key.toLowerCase()),
         );
         setVisibleColumns(filteredColumns);
       }
@@ -49,80 +49,80 @@ const TableDisplayer = ({
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows =
-    rowsPerPage === 0 ? data : data.slice(indexOfFirstRow, indexOfLastRow);
+      rowsPerPage === 0 ? data : data.slice(indexOfFirstRow, indexOfLastRow);
 
   return (
-    <div className="table-container">
-      <div className="table-header-controls">
-        <h2 className="table-title">{tableName}</h2>
-        <select
-          className="rows-per-page-selector"
-          value={rowsPerPage === 0 ? "all" : rowsPerPage}
-          onChange={(e) =>
-            onRowsPerPageChange(
-              e.target.value === "all" ? 0 : parseInt(e.target.value),
-            )
-          }
-        >
-          <option value="10">10</option>
-          <option value="30">30</option>
-          <option value="50">50</option>
-          <option value="90">90</option>
-          <option value="all">All</option>
-        </select>
-      </div>
+      <div className="table-container">
+        <div className="table-header-controls">
+          <h2 className="table-title">{tableName}</h2>
+          <select
+              className="rows-per-page-selector"
+              value={rowsPerPage === 0 ? "all" : rowsPerPage}
+              onChange={(e) =>
+                  onRowsPerPageChange(
+                      e.target.value === "all" ? 0 : parseInt(e.target.value),
+                  )
+              }
+          >
+            <option value="10">10</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+            <option value="90">90</option>
+            <option value="all">All</option>
+          </select>
+        </div>
 
-      <div className="table-wrapper">
-        <table className="data-table">
-          <thead>
+        <div className="table-wrapper">
+          <table className="data-table">
+            <thead>
             <tr className="table-header">
               <th className="table-header-cell">S.No</th>
               {visibleColumns.map((key, index) => (
-                <th key={index} className="table-header-cell">
-                  {key}
-                </th>
+                  <th key={index} className="table-header-cell">
+                    {key}
+                  </th>
               ))}
             </tr>
-          </thead>
-          <tbody>
+            </thead>
+            <tbody>
             {currentRows.map((row, rowIdx) => (
-              <tr key={rowIdx} className="table-row">
-                <td className="table-cell">{indexOfFirstRow + rowIdx + 1}</td>
-                {visibleColumns.map((col, colIdx) => (
-                  <td key={colIdx} className="table-cell">
-                    {row[col] !== null
-                      ? row[col]?.toString().length > 35
-                        ? `${row[col]?.toString().slice(0, 35)}...`
-                        : row[col]?.toString()
-                      : "null"}
-                  </td>
-                ))}
-              </tr>
+                <tr key={rowIdx} className="table-row">
+                  <td className="table-cell">{indexOfFirstRow + rowIdx + 1}</td>
+                  {visibleColumns.map((col, colIdx) => (
+                      <td key={colIdx} className="table-cell">
+                        {row[col] !== null
+                            ? row[col]?.toString().length > 35
+                                ? `${row[col]?.toString().slice(0, 35)}...`
+                                : row[col]?.toString()
+                            : "null"}
+                      </td>
+                  ))}
+                </tr>
             ))}
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
 
-      <div className="pagination">
-        <button
-          className="pagination-button"
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <span className="pagination-info">
+        <div className="pagination">
+          <button
+              className="pagination-button"
+              onClick={() => onPageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span className="pagination-info">
           Page {currentPage} of {totalPages}
         </span>
-        <button
-          className="pagination-button"
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
+          <button
+              className="pagination-button"
+              onClick={() => onPageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
       </div>
-    </div>
   );
 };
 

@@ -32,32 +32,6 @@
   letter-spacing: 2px;
 }
 
-.navbar-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navbar-actions ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  gap: 20px;
-  margin-right: 10px;
-}
-
-.navbar-actions ul li {
-  font-size: 26px;
-  padding: 5px;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.navbar-actions ul li:hover {
-  background-color: var(--navbar-top-bg-color-hover);
-  border-radius: 5px;
-}
-
 .navbar-sidebar {
   display: flex;
 }

@@ -63,59 +63,6 @@ html, body {
   --schema-err-msg-color: #c26c6c;
 }
 
-
-[data-theme='dark'] {
-  --body-background: #171c28;
-  --navbar-top-bg-color: #171c28;
-  --navbar-top-text-color: #8695b7;
-  --navbar-top-bg-color-hover: #2c3039;
-
-  --navbar-sidebar-bg-color: #171c28;
-  --navbar-sidebar-text-color: #444d61;
-  --navbar-sidebar-fg-color-hover: #8695b7;
-  --navbar-sidebar-active-border-color: #8695b7;
-  --navbar-sidebar-active-fg-color-active: #8695b7;
-
-  /* Sidebar Colors */
-  --sidebar-bg-color: #171c28;
-  --sidebar-text-color: #707a80;
-  --sidebar-icon-color: #bcc5c5;
-  --sidebar-bg-color-hover: #1c2230;
-  --sidebar-selected-bg-color: #1c2230;
-  --sidebar-msg-color: #cccccc;
-  --sidebar-err-msg-color: #ff6b6b;
-
-  /* Tables Page Navigation */
-  --tables-bg-color: #f1f3f5;
-  --tables-border-color: #e0e0e0;
-  --tables-text-color: #555;
-  --tables-cell-text-color: #444;
-  --tables-hover-bg-color: #f0f0f0;
-  --tables-btn-bg-color: #007bff;
-  --tables-btn-hover-bg-color: #0056b3;
-  --tables-btn-disabled-bg: #ccc;
-  --tables-selector-bg: #f1f3f5;
-  --tables-selector-hover-bg: #e0e0e0;
-  --tables-pagination-text-color: #fff;
-
-  /* Schema Page Colors */
-  --schema-bg-color: #011627;
-  --schema-text-color: #5d686f;
-  --schema-title-color: #c9dce2;
-  --schema-section-title-color: #cbccbe;
-  --schema-table-header-bg: #052846;
-  --schema-table-header-text: #cbccc6;
-  --schema-table-row-even-bg: #071d2f;
-  --schema-table-row-odd-bg: #011627;
-  --schema-table-row-hover-bg: #12293b;
-  --schema-table-border-color: #052846;
-  --schema-table-shadow: rgba(255, 255, 255, 0.1);
-  --schema-msg-color: #cccccc;
-  --schema-err-msg-color: #ff6b6b;
-
-
-}
-
 body {
   background-color: var(--body-background);
 }

@@ -1,32 +1,78 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 import SqlEditor from "../components/SqlEditor.tsx";
 import "./../styles/sqlPage/SqlPage.css";
-import { sqlCommands } from "../utils/sqlEditorMisc.ts";
 import TableDisplayer from "../components/TableDisplayer.tsx";
+import { sqlCommands } from "../utils/sqlEditorMisc.ts";
+import useFetch from "../hooks/useFetch.ts";
+import { DNA } from "react-loader-spinner";
+import useSidebarStore from "../store/useSidebarStore.ts";
 
 const SqlPage = () => {
+  const location = useLocation();
+
   const [query, setQuery] = useState<string>("");
-  const [tableData, setTableData] = useState<any[]>([]);
   const [tableName, setTableName] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const [totalRows, setTotalRows] = useState<number>(0);
+  const { isOpen } = useSidebarStore();
+
+  // eslint-disable-next-line
+  const { data, error, loading } = useFetch<any>(
+      tableName ? `/data/${tableName}.json` : null
+  );
+
   const [columns, setColumns] = useState<string[]>([]);
 
-  const fetchTableData = useCallback(async () => {
-    const finalQuery = query.trim();
+  const sampleQueries: { [key: string]: string[] } = useMemo(() => ({
+    "1": [
+      "-- Retrieve all employees",
+      "SELECT * FROM employees;",
+      "-- Retrieve all orders",
+      "SELECT * FROM orders;",
+      "-- Retrieve all customers",
+      "SELECT * FROM customers;",
+      ...Array(8).fill(""),
+    ],
+    "2": [
+      "-- Retrieve employee names and titles",
+      "SELECT firstName, title FROM employees;",
+      "-- Retrieve customer IDs and order dates",
+      "SELECT customerID, orderDate FROM orders;",
+      "-- Retrieve customer contact names and company names",
+      "SELECT contactName, companyName FROM customers;",
+      ...Array(8).fill(""),
+    ],
+    "3": [
+      "-- Incorrect queries with intentional errors",
+      "SElCT * FROM emp; -- Typo: SElCT instead of SELECT",
+      "SEELCT * FROM ord; -- Typo: SEELCT instead of SELECT",
+      "SELCT * FROM cust; -- Typo: SELCT instead of SELECT",
+      ...Array(8).fill(""),
+    ],
+  }), []);
+
+  useEffect(() => {
+    const match = location.pathname.match(/\/sql\/query-(\d+)/);
+    const id = match?.[1];
+
+    if (id && sampleQueries[id]) {
+      setQuery(sampleQueries[id].join("\n"));
+    } else {
+      setQuery("");
+    }
+  }, [location.pathname, sampleQueries]);
+
+  const fetchTableData = useCallback((submittedQuery: string) => {
+    const finalQuery = submittedQuery.trim();
 
     if (!finalQuery) {
-      setTableData([]);
       setTableName(null);
       setColumns([]);
-      setTotalRows(0);
-      setCurrentPage(1); // ✅ Reset page on empty query
       return;
     }
 
-    const lastQuery =
-      finalQuery
+    const lastQuery = finalQuery
         .split("\n")
         .filter((line) => line.trim())
         .pop() || "";
@@ -35,34 +81,10 @@ const SqlPage = () => {
 
     if (table) {
       setTableName(table);
-      setCurrentPage(1); // ✅ Reset page when query changes
-      try {
-        const response = await fetch(`/public/data/${table}.json`);
-        if (!response.ok) throw new Error("Failed to fetch table data");
-
-        const jsonData = await response.json();
-        const rows = jsonData?.data || [];
-
-        setTableData(rows);
-        setTotalRows(jsonData.count || rows.length);
-
-        setColumns(
-          selectedColumns.length > 0
-            ? selectedColumns
-            : Object.keys(rows[0] || {}),
-        );
-      } catch (error) {
-        console.error("Error fetching table:", error);
-        setTableData([]);
-        setTotalRows(0);
-        setColumns([]);
-      }
+      setCurrentPage(1);
+      setColumns(selectedColumns);
     }
-  }, [query]); // ✅ Reset page only when query changes
-
-  useEffect(() => {
-    fetchTableData();
-  }, [fetchTableData]);
+  }, []);
 
   const handlePageChange = (newPage: number) => {
     setCurrentPage(newPage);
@@ -74,19 +96,70 @@ const SqlPage = () => {
   };
 
   return (
-    <div className="sql-page">
-      <SqlEditor onSubmit={setQuery} />
-      <TableDisplayer
-        tableName={tableName || ""}
-        data={tableData}
-        totalRows={totalRows}
-        currentPage={currentPage}
-        rowsPerPage={rowsPerPage}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
-        columns={columns}
-      />
-    </div>
+      <div
+          className={
+              "sql-page " + (isOpen ? "sql-sidebar-open" : "sql-sidebar-closed")
+          }
+      >
+        {query ? (
+            <>
+              <SqlEditor onSubmit={fetchTableData} query={query} />
+
+              {tableName ? (
+                  <>
+                    {loading ? (
+                        <div className="loading-container">
+                          <DNA
+                              visible={true}
+                              height="80"
+                              width="80"
+                              ariaLabel="dna-loading"
+                          />
+                          <p className="loading-text">Loading table data...</p>
+                        </div>
+                    ) : error || !data ? (
+                        <div className="error-container">
+                          <h2 className="error-title">⚠️ Failed to load table</h2>
+                          <p className="error-description">Please try again later.</p>
+                        </div>
+                    ) : (
+                        <div className="sql-table-container">
+                          <TableDisplayer
+                              tableName={tableName || ""}
+                              data={data?.data || []}
+                              totalRows={data?.count || 0}
+                              currentPage={currentPage}
+                              rowsPerPage={rowsPerPage}
+                              onPageChange={handlePageChange}
+                              onRowsPerPageChange={handleRowsPerPageChange}
+                              columns={
+                                columns.length > 0
+                                    ? columns
+                                    : Object.keys(data?.data?.[0] || {})
+                              }
+                          />
+                        </div>
+                    )}
+                  </>
+              ) : (
+                  <div className="no-query-message">
+                    <h2 className="no-query-title">No query executed</h2>
+                    <p className="no-query-description">
+                      Please enter a SQL query and submit it to display the results.
+                    </p>
+                  </div>
+              )}
+            </>
+        ) : (
+            <div className="no-query-message">
+              <h2 className="no-query-title">Click on a query</h2>
+              <p className="no-query-description">
+                Select a query by visiting <code>/sql/query-1</code>,{" "}
+                <code>/sql/query-2</code>, or <code>/sql/query-3</code>.
+              </p>
+            </div>
+        )}
+      </div>
   );
 };
 
