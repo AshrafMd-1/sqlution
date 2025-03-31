@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {useLocation} from "react-router-dom";
 import SqlEditor from "../components/SqlEditor.tsx";
 import "../styles/sqlPage/SqlPage.css";
 import TableDisplayer from "../components/TableDisplayer.tsx";
-import { sqlCommands } from "../utils/sqlEditorMisc.ts";
+import {sqlCommands} from "../utils/sqlEditorMisc.ts";
 import useFetch from "../hooks/useFetch.ts";
-import { DNA } from "react-loader-spinner";
+import {DNA} from "react-loader-spinner";
 import useSidebarStore from "../store/useSidebarStore.ts";
 
 const SqlPage = () => {
@@ -18,11 +18,11 @@ const SqlPage = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [commandError, setCommandError] = useState<boolean>(false);
-  const { isOpen } = useSidebarStore();
+  const {isOpen} = useSidebarStore();
 
 
 // eslint-disable-next-line
-  const { data, error, loading } = useFetch<any>(
+  const {data, error, loading} = useFetch<any>(
       tableName ? `/data/${tableName}.json` : null
   );
 
@@ -68,7 +68,7 @@ const SqlPage = () => {
     } else {
       setQuery("");
     }
-  }, [location.pathname, hasQueryId]);
+  }, [location.pathname, hasQueryId, match, sampleQueries]);
 
   useEffect(() => {
     if (query.trim()) {
@@ -91,7 +91,7 @@ const SqlPage = () => {
         .filter((line) => line.trim())
         .pop() || "";
 
-    const { table, columns: selectedColumns } = sqlCommands(lastQuery);
+    const {table, columns: selectedColumns} = sqlCommands(lastQuery);
     if (table) {
       setTableName(table);
       setColumns(selectedColumns);
@@ -115,11 +115,11 @@ const SqlPage = () => {
       <div className={"sql-page " + (isOpen ? "sql-sidebar-open" : "sql-sidebar-closed")}>
         {hasQueryId ? (
             <>
-              <SqlEditor onSubmit={fetchTableData} query={query} />
+              <SqlEditor onSubmit={fetchTableData} query={query}/>
 
               {loading ? (
                   <div className="loading-container">
-                    <DNA visible={true} height="80" width="80" ariaLabel="dna-loading" />
+                    <DNA visible={true} height="80" width="80" ariaLabel="dna-loading"/>
                   </div>
               ) : commandError || error ? (
                   <div className="error-container">
@@ -141,7 +141,8 @@ const SqlPage = () => {
               ) : (
                   <div className="no-query-message">
                     <h2 className="no-query-title">No query executed</h2>
-                    <p className="no-query-description">Please enter a SQL query and submit it to display the results.</p>
+                    <p className="no-query-description">Please enter a SQL query and submit it to display the
+                      results.</p>
                   </div>
               )}
             </>

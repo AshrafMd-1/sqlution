@@ -1,5 +1,5 @@
 import {useParams} from "react-router";
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import "../styles/tablesPage/TablesPage.css";
 import TableComponent from "../components/TableDisplayer.tsx";
 import {DNA} from "react-loader-spinner";
