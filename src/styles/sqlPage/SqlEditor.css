@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+
+.sql-editor {
+  display: flex;
+  flex-direction: column;
+  width: calc(100vw - 190px - 50px);
+}
+
+.editor-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 5px;
+  background-color: #f8f9fb;
+  border-bottom: 1px solid #e2e8f0;
+  height: 30px;
+  box-sizing: border-box;
+}
+
+.editor-title {
+  font-size: 22px;
+  color: #28315A;
+  font-weight: bold;
+  margin-left: 20px;
+  text-transform: capitalize;
+
+}
+
+.editor-submit-button {
+  padding: 4px 8px;
+  font-size: 18px;
+  background-color: #fcfcfc;
+  color: #171717;
+  border: 1px solid #b2b2b2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.editor-main {
+  width: 100%;
+  height: 50vh;
+  overflow: auto;
+  box-sizing: border-box;
+  outline: none;
+  background: #f8f9fb;
+}
+

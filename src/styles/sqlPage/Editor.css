@@ -1,0 +1,90 @@
+.cm-editor {
+  font-family: 'Fira Code', monospace !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #f8f9fb !important;
+}
+
+.cm-content {
+  color: #1a202c !important;
+  padding: 0 !important;
+}
+
+.cm-line {
+  padding: 4px 8px !important;
+}
+
+.cm-keyword {
+  color: #6366f1 !important;
+  font-weight: bold !important;
+}
+
+.cm-string {
+  color: #10b981 !important;
+}
+
+.cm-number {
+  color: #f59e0b !important;
+}
+
+.cm-variable {
+  color: #3b82f6 !important;
+}
+
+.cm-comment {
+  color: #9ca3af !important;
+  font-style: italic !important;
+}
+
+.cm-cursor {
+  border-left: 2px solid #4f46e5 !important;
+}
+
+.cm-selectionBackground {
+  background: #c7d2fe !important;
+}
+
+.cm-gutters {
+  background: #f3f4f6 !important;
+  color: #9ca3af !important;
+  border-right: 1px solid #e5e7eb !important;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+  padding: 0 12px !important;
+}
+
+/* Scrollbar styling */
+.cm-scroller {
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbd5e1 #f1f5f9 !important;
+}
+
+.cm-scroller::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px !important;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+.cm-focused {
+  outline: none !important;
+}
+
+.cm-tooltip-autocomplete {
+  display: block !important;
+  background: #f3f4f6 !important;
+  color: #1a202c !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  z-index: 10 !important;
+}

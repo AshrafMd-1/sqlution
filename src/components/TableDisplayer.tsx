@@ -1,5 +1,5 @@
-import React from "react";
 import "./../styles/tablesPage/TableDisplayer.css";
+import { useEffect, useState } from "react";
 
 interface TableRow {
   [key: string]: string | number | null;
@@ -13,9 +13,10 @@ interface TableProps {
   rowsPerPage: number;
   onPageChange: (newPage: number) => void;
   onRowsPerPageChange: (value: number) => void;
+  columns: string[];
 }
 
-const TableComponent: React.FC<TableProps> = ({
+const TableDisplayer = ({
   tableName,
   data,
   totalRows,
@@ -23,7 +24,39 @@ const TableComponent: React.FC<TableProps> = ({
   rowsPerPage,
   onPageChange,
   onRowsPerPageChange,
-}) => {
+  columns,
+}: TableProps) => {
+  const [visibleColumns, setVisibleColumns] = useState<string[]>([]);
+  console.log(
+    "TableDisplayer - Data:",
+    data,
+    "Columns:",
+    columns,
+    "Total Rows:",
+    totalRows,
+    "Current Page:",
+    currentPage,
+    "Rows Per Page:",
+    rowsPerPage,
+    visibleColumns,
+  );
+
+  useEffect(() => {
+    if (data.length > 0) {
+      const keys = Object.keys(data[0]);
+      const lowerCaseColumns = columns.map((col) => col.toLowerCase());
+
+      if (columns.includes("*")) {
+        setVisibleColumns(keys);
+      } else {
+        const filteredColumns = keys.filter((key) =>
+          lowerCaseColumns.includes(key.toLowerCase()),
+        );
+        setVisibleColumns(filteredColumns);
+      }
+    }
+  }, [data, columns]);
+
   const totalPages = rowsPerPage === 0 ? 1 : Math.ceil(totalRows / rowsPerPage);
 
   const indexOfLastRow = currentPage * rowsPerPage;
@@ -57,24 +90,23 @@ const TableComponent: React.FC<TableProps> = ({
           <thead>
             <tr className="table-header">
               <th className="table-header-cell">S.No</th>
-              {data.length > 0 &&
-                Object.keys(data[0]).map((key, index) => (
-                  <th key={index} className="table-header-cell">
-                    {key}
-                  </th>
-                ))}
+              {visibleColumns.map((key, index) => (
+                <th key={index} className="table-header-cell">
+                  {key}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {currentRows.map((row, idx) => (
-              <tr key={idx} className="table-row">
-                <td className="table-cell">{indexOfFirstRow + idx + 1}</td>
-                {Object.values(row).map((value, idx) => (
-                  <td key={idx} className="table-cell">
-                    {value !== null
-                      ? value.toString().length > 35
-                        ? `${value.toString().slice(0, 35)}...`
-                        : value.toString()
+            {currentRows.map((row, rowIdx) => (
+              <tr key={rowIdx} className="table-row">
+                <td className="table-cell">{indexOfFirstRow + rowIdx + 1}</td>
+                {visibleColumns.map((col, colIdx) => (
+                  <td key={colIdx} className="table-cell">
+                    {row[col] !== null
+                      ? row[col]?.toString().length > 35
+                        ? `${row[col]?.toString().slice(0, 35)}...`
+                        : row[col]?.toString()
                       : "null"}
                   </td>
                 ))}
@@ -107,4 +139,4 @@ const TableComponent: React.FC<TableProps> = ({
   );
 };
 
-export default TableComponent;
+export default TableDisplayer;
