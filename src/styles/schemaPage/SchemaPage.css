@@ -1,0 +1,41 @@
+.schema-page {
+  padding: 10px;
+  width: 100%;
+  height: calc(100vh - 50px);
+}
+
+.schema-title {
+  font-size: 2rem;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.schema-description-section, .schema-columns-section {
+  margin: 20px 0;
+}
+
+.schema-description-title, .schema-columns-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.schema-description-table, .schema-columns-table {
+  border: 1px solid var(--sidebar-text-color);
+  border-collapse: collapse;
+}
+
+.schema-description-table th,
+.schema-description-table td,
+.schema-columns-table th,
+.schema-columns-table td {
+  border: 1px solid var(--sidebar-text-color);
+  padding: 10px;
+  text-align: left;
+}
+
+.schema-description-table th,
+.schema-columns-table th {
+  background-color: var(--sidebar-bg-color);
+  color: var(--sidebar-text-color);
+}
+

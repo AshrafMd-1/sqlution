@@ -1,0 +1,18 @@
+.tables-page-container {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 190px - 48px);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f7f9fc;
+}
+
+
+.info-message,
+.error-message,
+.loading-message {
+  font-size: 18px;
+  color: #555;
+  margin: 20px 0;
+}

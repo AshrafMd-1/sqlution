@@ -1,0 +1,63 @@
+{
+  "metadata": {
+    "count": 830,
+    "columns": [
+      {
+        "name": "orderID",
+        "type": "integer"
+      },
+      {
+        "name": "customerID",
+        "type": "string"
+      },
+      {
+        "name": "employeeID",
+        "type": "integer"
+      },
+      {
+        "name": "orderDate",
+        "type": "datetime"
+      },
+      {
+        "name": "requiredDate",
+        "type": "datetime"
+      },
+      {
+        "name": "shippedDate",
+        "type": "datetime"
+      },
+      {
+        "name": "shipVia",
+        "type": "integer"
+      },
+      {
+        "name": "freight",
+        "type": "float"
+      },
+      {
+        "name": "shipName",
+        "type": "string"
+      },
+      {
+        "name": "shipAddress",
+        "type": "string"
+      },
+      {
+        "name": "shipCity",
+        "type": "string"
+      },
+      {
+        "name": "shipRegion",
+        "type": "string"
+      },
+      {
+        "name": "shipPostalCode",
+        "type": "integer"
+      },
+      {
+        "name": "shipCountry",
+        "type": "string"
+      }
+    ]
+  }
+}

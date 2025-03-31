@@ -1,0 +1,8 @@
+{
+  "count": 3,
+  "tables": [
+    "customers",
+    "orders",
+    "employees"
+  ]
+}
