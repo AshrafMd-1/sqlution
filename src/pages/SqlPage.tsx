@@ -18,7 +18,7 @@ const SqlPage = () => {
   const [commandError, setCommandError] = useState<boolean>(false);
   const {isOpen} = useSidebarStore();
 
-  // eslint-disable-next-line
+  // Fetch data
   const {data, error, loading} = useFetch<any>(
       tableName ? `/data/${tableName}.json` : null
   );
@@ -51,7 +51,6 @@ const SqlPage = () => {
       "SELECT * FROM ; -- Error: Missing table name",
       ...Array(8).fill(""),
     ],
-
   }), []);
 
   useEffect(() => {
@@ -61,9 +60,16 @@ const SqlPage = () => {
     if (id && sampleQueries[id]) {
       setQuery(sampleQueries[id].join("\n"));
     } else {
-      setQuery("");
+      const savedQuery = localStorage.getItem("savedQuery");
+      setQuery(savedQuery || "");
     }
   }, [location.pathname, sampleQueries]);
+
+  useEffect(() => {
+    if (query.trim()) {
+      localStorage.setItem("savedQuery", query);
+    }
+  }, [query]);
 
   const fetchTableData = useCallback((submittedQuery: string) => {
     const finalQuery = submittedQuery.trim();
@@ -108,7 +114,7 @@ const SqlPage = () => {
       >
         {query ? (
             <>
-              <SqlEditor onSubmit={fetchTableData} query={query}/>
+              <SqlEditor onSubmit={fetchTableData} query={query} />
 
               {loading ? (
                   <div className="loading-container">

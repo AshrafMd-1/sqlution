@@ -152,7 +152,7 @@ const SqlEditor = ({onSubmit, query}: SqlEditorProps) => {
               </ul>
             </div>
             <button className="editor-submit-button" onClick={handleSubmit}>
-              Submit
+              Run
             </button>
           </div>
         </div>
