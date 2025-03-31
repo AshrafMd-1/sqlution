@@ -1,10 +1,10 @@
-import { MdOutlineTableChart } from "react-icons/md";
-import { PiFileSqlDuotone } from "react-icons/pi";
+import {MdOutlineTableChart} from "react-icons/md";
+import {PiFileSqlDuotone} from "react-icons/pi";
 import "../styles/navbarPage/Sidebar.css";
-import { useNavigate } from "react-router";
-import { useLocation } from "react-router-dom";
+import {useNavigate} from "react-router";
+import {useLocation} from "react-router-dom";
 import useFetch from "../hooks/useFetch";
-import { DNA } from "react-loader-spinner";
+import {DNA} from "react-loader-spinner";
 
 interface TablesSchema {
   tables: string[];
@@ -21,14 +21,16 @@ const dictionary = {
   schema: "Schema",
 };
 
-const Sidebar = ({ isOpen }: Props) => {
+const Sidebar = ({isOpen}: Props) => {
   const location = useLocation();
   const navigate = useNavigate();
   const isSqlRoute = location.pathname.startsWith("/sql");
 
-  const { data, error, loading } = useFetch<TablesSchema>(
-      isSqlRoute ? null : "/data/tables.json"
+  const {data: cachedData} = useFetch<TablesSchema>(null);
+  const {data, error, loading} = useFetch<TablesSchema>(
+      isSqlRoute ? null : cachedData ? null : "/data/tables.json"
   );
+
 
   if (!isOpen) return null;
 
@@ -55,7 +57,7 @@ const Sidebar = ({ isOpen }: Props) => {
         <div className="sidebar-content">
           {loading && !isSqlRoute && (
               <div className="sidebar-msg-container">
-                <DNA visible={true} height="60" width="60" ariaLabel="dna-loading" />
+                <DNA visible={true} height="60" width="60" ariaLabel="dna-loading"/>
               </div>
           )}
 
@@ -79,7 +81,7 @@ const Sidebar = ({ isOpen }: Props) => {
                         className={isActiveTab(item) ? "sidebar-item-active" : "sidebar-item-normal"}
                         onClick={() => navigate(`/${location.pathname.split("/")[1]}/${item}`)}
                     >
-                      {isSqlRoute ? <PiFileSqlDuotone /> : <MdOutlineTableChart />}
+                      {isSqlRoute ? <PiFileSqlDuotone/> : <MdOutlineTableChart/>}
                       <span className="sidebar-table-name">{item}</span>
                     </li>
                 ))}

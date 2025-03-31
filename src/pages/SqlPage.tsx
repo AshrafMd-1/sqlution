@@ -1,25 +1,28 @@
-import {useCallback, useEffect, useMemo, useState} from "react";
-import {useLocation} from "react-router-dom";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import SqlEditor from "../components/SqlEditor.tsx";
 import "../styles/sqlPage/SqlPage.css";
 import TableDisplayer from "../components/TableDisplayer.tsx";
-import {sqlCommands} from "../utils/sqlEditorMisc.ts";
+import { sqlCommands } from "../utils/sqlEditorMisc.ts";
 import useFetch from "../hooks/useFetch.ts";
-import {DNA} from "react-loader-spinner";
+import { DNA } from "react-loader-spinner";
 import useSidebarStore from "../store/useSidebarStore.ts";
 
 const SqlPage = () => {
   const location = useLocation();
+  const match = location.pathname.match(/\/sql\/query-(\d+)/);
+  const hasQueryId = !!match;
 
   const [query, setQuery] = useState<string>("");
   const [tableName, setTableName] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
   const [commandError, setCommandError] = useState<boolean>(false);
-  const {isOpen} = useSidebarStore();
+  const { isOpen } = useSidebarStore();
 
-  // Fetch data
-  const {data, error, loading} = useFetch<any>(
+
+// eslint-disable-next-line
+  const { data, error, loading } = useFetch<any>(
       tableName ? `/data/${tableName}.json` : null
   );
 
@@ -54,16 +57,18 @@ const SqlPage = () => {
   }), []);
 
   useEffect(() => {
-    const match = location.pathname.match(/\/sql\/query-(\d+)/);
-    const id = match?.[1];
-
-    if (id && sampleQueries[id]) {
-      setQuery(sampleQueries[id].join("\n"));
+    if (hasQueryId) {
+      const id = match?.[1];
+      if (id && sampleQueries[id]) {
+        setQuery(sampleQueries[id].join("\n"));
+      } else {
+        const savedQuery = localStorage.getItem("savedQuery");
+        setQuery(savedQuery || "");
+      }
     } else {
-      const savedQuery = localStorage.getItem("savedQuery");
-      setQuery(savedQuery || "");
+      setQuery("");
     }
-  }, [location.pathname, sampleQueries]);
+  }, [location.pathname, hasQueryId]);
 
   useEffect(() => {
     if (query.trim()) {
@@ -86,7 +91,7 @@ const SqlPage = () => {
         .filter((line) => line.trim())
         .pop() || "";
 
-    const {table, columns: selectedColumns} = sqlCommands(lastQuery);
+    const { table, columns: selectedColumns } = sqlCommands(lastQuery);
     if (table) {
       setTableName(table);
       setColumns(selectedColumns);
@@ -107,56 +112,37 @@ const SqlPage = () => {
   };
 
   return (
-      <div
-          className={
-              "sql-page " + (isOpen ? "sql-sidebar-open" : "sql-sidebar-closed")
-          }
-      >
-        {query ? (
+      <div className={"sql-page " + (isOpen ? "sql-sidebar-open" : "sql-sidebar-closed")}>
+        {hasQueryId ? (
             <>
               <SqlEditor onSubmit={fetchTableData} query={query} />
 
               {loading ? (
                   <div className="loading-container">
-                    <DNA
-                        visible={true}
-                        height="80"
-                        width="80"
-                        ariaLabel="dna-loading"
+                    <DNA visible={true} height="80" width="80" ariaLabel="dna-loading" />
+                  </div>
+              ) : commandError || error ? (
+                  <div className="error-container">
+                    <h2 className="error-title">⚠️ Failed to load table</h2>
+                  </div>
+              ) : tableName ? (
+                  <div className="sql-table-container">
+                    <TableDisplayer
+                        tableName={tableName || ""}
+                        data={data?.data || []}
+                        totalRows={data?.count || 0}
+                        currentPage={currentPage}
+                        rowsPerPage={rowsPerPage}
+                        onPageChange={handlePageChange}
+                        onRowsPerPageChange={handleRowsPerPageChange}
+                        columns={columns.length > 0 ? columns : Object.keys(data?.data?.[0] || {})}
                     />
                   </div>
               ) : (
-                  (commandError || error) ? (
-                      <div className="error-container">
-                        <h2 className="error-title">⚠️ Failed to load table</h2>
-                      </div>
-                  ) : (
-                      tableName ? (
-                          <div className="sql-table-container">
-                            <TableDisplayer
-                                tableName={tableName || ""}
-                                data={data?.data || []}
-                                totalRows={data?.count || 0}
-                                currentPage={currentPage}
-                                rowsPerPage={rowsPerPage}
-                                onPageChange={handlePageChange}
-                                onRowsPerPageChange={handleRowsPerPageChange}
-                                columns={
-                                  columns.length > 0
-                                      ? columns
-                                      : Object.keys(data?.data?.[0] || {})
-                                }
-                            />
-                          </div>
-                      ) : (
-                          <div className="no-query-message">
-                            <h2 className="no-query-title">No query executed</h2>
-                            <p className="no-query-description">
-                              Please enter a SQL query and submit it to display the results.
-                            </p>
-                          </div>
-                      )
-                  )
+                  <div className="no-query-message">
+                    <h2 className="no-query-title">No query executed</h2>
+                    <p className="no-query-description">Please enter a SQL query and submit it to display the results.</p>
+                  </div>
               )}
             </>
         ) : (
