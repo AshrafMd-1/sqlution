@@ -15,6 +15,7 @@ const SqlPage = () => {
   const [tableName, setTableName] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+  const [commandError, setCommandError] = useState<boolean>(false);
   const {isOpen} = useSidebarStore();
 
   // eslint-disable-next-line
@@ -45,11 +46,12 @@ const SqlPage = () => {
     ],
     "3": [
       "-- Incorrect queries with intentional errors",
-      "SElCT * FROM emp; -- Typo: SElCT instead of SELECT",
-      "SEELCT * FROM ord; -- Typo: SEELCT instead of SELECT",
-      "SELCT * FROM cust; -- Typo: SELCT instead of SELECT",
+      "SELECT * FROM emp; -- Error: 'emp' table does not exist",
+      "SEELCT * FROM orders; -- Typo: SEELCT instead of SELECT",
+      "SELECT * FROM ; -- Error: Missing table name",
       ...Array(8).fill(""),
     ],
+
   }), []);
 
   useEffect(() => {
@@ -69,6 +71,7 @@ const SqlPage = () => {
     if (!finalQuery) {
       setTableName(null);
       setColumns([]);
+      setCommandError(false);
       return;
     }
 
@@ -78,11 +81,13 @@ const SqlPage = () => {
         .pop() || "";
 
     const {table, columns: selectedColumns} = sqlCommands(lastQuery);
-
     if (table) {
       setTableName(table);
-      setCurrentPage(1);
       setColumns(selectedColumns);
+      setCurrentPage(1);
+      setCommandError(false);
+    } else {
+      setCommandError(true);
     }
   }, []);
 
@@ -105,47 +110,47 @@ const SqlPage = () => {
             <>
               <SqlEditor onSubmit={fetchTableData} query={query}/>
 
-              {tableName ? (
-                  <>
-                    {loading ? (
-                        <div className="loading-container">
-                          <DNA
-                              visible={true}
-                              height="80"
-                              width="80"
-                              ariaLabel="dna-loading"
-                          />
-                        </div>
-                    ) : error || !data ? (
-                        <div className="error-container">
-                          <h2 className="error-title">⚠️ Failed to load table</h2>
-                        </div>
-                    ) : (
-                        <div className="sql-table-container">
-                          <TableDisplayer
-                              tableName={tableName || ""}
-                              data={data?.data || []}
-                              totalRows={data?.count || 0}
-                              currentPage={currentPage}
-                              rowsPerPage={rowsPerPage}
-                              onPageChange={handlePageChange}
-                              onRowsPerPageChange={handleRowsPerPageChange}
-                              columns={
-                                columns.length > 0
-                                    ? columns
-                                    : Object.keys(data?.data?.[0] || {})
-                              }
-                          />
-                        </div>
-                    )}
-                  </>
-              ) : (
-                  <div className="no-query-message">
-                    <h2 className="no-query-title">No query executed</h2>
-                    <p className="no-query-description">
-                      Please enter a SQL query and submit it to display the results.
-                    </p>
+              {loading ? (
+                  <div className="loading-container">
+                    <DNA
+                        visible={true}
+                        height="80"
+                        width="80"
+                        ariaLabel="dna-loading"
+                    />
                   </div>
+              ) : (
+                  (commandError || error || !data) ? (
+                      <div className="error-container">
+                        <h2 className="error-title">⚠️ Failed to load table</h2>
+                      </div>
+                  ) : (
+                      tableName ? (
+                          <div className="sql-table-container">
+                            <TableDisplayer
+                                tableName={tableName || ""}
+                                data={data?.data || []}
+                                totalRows={data?.count || 0}
+                                currentPage={currentPage}
+                                rowsPerPage={rowsPerPage}
+                                onPageChange={handlePageChange}
+                                onRowsPerPageChange={handleRowsPerPageChange}
+                                columns={
+                                  columns.length > 0
+                                      ? columns
+                                      : Object.keys(data?.data?.[0] || {})
+                                }
+                            />
+                          </div>
+                      ) : (
+                          <div className="no-query-message">
+                            <h2 className="no-query-title">No query executed</h2>
+                            <p className="no-query-description">
+                              Please enter a SQL query and submit it to display the results.
+                            </p>
+                          </div>
+                      )
+                  )
               )}
             </>
         ) : (

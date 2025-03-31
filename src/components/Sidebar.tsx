@@ -42,7 +42,6 @@ const Sidebar = ({isOpen}: Props) => {
     return isSqlRoute ? queries : data?.tables || [];
   };
 
-  // ✅ New function to check if tab is active
   const isActiveTab = (item: string) => {
     const currentPath = location.pathname.split("/").slice(1).join("/");
     return currentPath.includes(item.toLowerCase());
@@ -61,7 +60,6 @@ const Sidebar = ({isOpen}: Props) => {
                     width="60"
                     ariaLabel="dna-loading"
                 />
-                <p className="sidebar-msg-text">Loading...</p>
               </div>
           )}
 
