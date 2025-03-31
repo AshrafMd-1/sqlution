@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState, useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {useLocation} from "react-router-dom";
 import SqlEditor from "../components/SqlEditor.tsx";
 import "./../styles/sqlPage/SqlPage.css";
 import TableDisplayer from "../components/TableDisplayer.tsx";
-import { sqlCommands } from "../utils/sqlEditorMisc.ts";
+import {sqlCommands} from "../utils/sqlEditorMisc.ts";
 import useFetch from "../hooks/useFetch.ts";
-import { DNA } from "react-loader-spinner";
+import {DNA} from "react-loader-spinner";
 import useSidebarStore from "../store/useSidebarStore.ts";
 
 const SqlPage = () => {
@@ -15,10 +15,10 @@ const SqlPage = () => {
   const [tableName, setTableName] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(10);
-  const { isOpen } = useSidebarStore();
+  const {isOpen} = useSidebarStore();
 
   // eslint-disable-next-line
-  const { data, error, loading } = useFetch<any>(
+  const {data, error, loading} = useFetch<any>(
       tableName ? `/data/${tableName}.json` : null
   );
 
@@ -77,7 +77,7 @@ const SqlPage = () => {
         .filter((line) => line.trim())
         .pop() || "";
 
-    const { table, columns: selectedColumns } = sqlCommands(lastQuery);
+    const {table, columns: selectedColumns} = sqlCommands(lastQuery);
 
     if (table) {
       setTableName(table);
@@ -103,7 +103,7 @@ const SqlPage = () => {
       >
         {query ? (
             <>
-              <SqlEditor onSubmit={fetchTableData} query={query} />
+              <SqlEditor onSubmit={fetchTableData} query={query}/>
 
               {tableName ? (
                   <>
@@ -115,12 +115,10 @@ const SqlPage = () => {
                               width="80"
                               ariaLabel="dna-loading"
                           />
-                          <p className="loading-text">Loading table data...</p>
                         </div>
                     ) : error || !data ? (
                         <div className="error-container">
                           <h2 className="error-title">⚠️ Failed to load table</h2>
-                          <p className="error-description">Please try again later.</p>
                         </div>
                     ) : (
                         <div className="sql-table-container">
@@ -151,12 +149,8 @@ const SqlPage = () => {
               )}
             </>
         ) : (
-            <div className="no-query-message">
+            <div className="no-query-message-first">
               <h2 className="no-query-title">Click on a query</h2>
-              <p className="no-query-description">
-                Select a query by visiting <code>/sql/query-1</code>,{" "}
-                <code>/sql/query-2</code>, or <code>/sql/query-3</code>.
-              </p>
             </div>
         )}
       </div>

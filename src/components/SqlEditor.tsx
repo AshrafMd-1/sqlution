@@ -96,7 +96,6 @@ const SqlEditor = ({onSubmit, query}: SqlEditorProps) => {
       if (text) {
         setAiSQL(text);
 
-        // Add to history
         if (!aiQueries.includes(text)) {
           const newQueries = [...aiQueries, text];
           setAiQueries(newQueries);
@@ -132,7 +131,15 @@ const SqlEditor = ({onSubmit, query}: SqlEditorProps) => {
   return (
       <div className="sql-editor">
         <div className="editor-navbar">
-          <h3 className="editor-title">SQL Editor</h3>
+          <h3 className="editor-title">{
+            location
+                .pathname
+                .split("/")
+                .slice(-1)[0]
+                .replace(/-/g, " ")
+                .toUpperCase()
+          }
+          </h3>
           <div className="editor-navbar-actions">
             <div className="navbar-actions">
               <ul>
@@ -177,7 +184,6 @@ const SqlEditor = ({onSubmit, query}: SqlEditorProps) => {
             )}
           </div>
 
-          {/* History Section */}
           <div className="history-section">
             <h4>History</h4>
             {aiQueries.length === 0 ? (

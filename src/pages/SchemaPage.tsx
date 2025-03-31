@@ -24,6 +24,7 @@ const SchemaPage = () => {
           <p>Please select a table from the left menu to view its schema.</p>
         </div>
     );
+
   if (loading) {
     return (
         <div className="loader-container">
@@ -35,7 +36,7 @@ const SchemaPage = () => {
   if (!data && error) {
     return (
         <div className="schema-err-msg-container">
-          <p>⚠️ {error}</p>
+          <p>⚠️ Failed to fetch data </p>
         </div>
     );
   }

@@ -71,6 +71,7 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh - 100px);
+  background-color: #fff;
 }
 
 .schema-msg-container p {
@@ -89,5 +90,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 50px);
+  background-color: #fff;
 }

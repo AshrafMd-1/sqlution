@@ -15,7 +15,7 @@ html, body {
 }
 
 
-[data-theme='light'] {
+:root {
   --body-background: #f3f3f3;
   --navbar-top-bg-color: #dddddd;
   --navbar-top-text-color: #464646;

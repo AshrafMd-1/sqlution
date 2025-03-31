@@ -21,7 +21,6 @@ const TablesPage = () => {
   const [rowsPerPage, setRowsPerPage] = useState(30);
   const {isOpen} = useSidebarStore();
 
-  // Fetch table data using the useFetch hook
   const {data, error, loading} = useFetch<TableData>(
       name ? `/data/${name}.json` : null,
   );
@@ -50,9 +49,9 @@ const TablesPage = () => {
                   ariaLabel="dna-loading"
               />
             </div>
-        ) : error ? (
+        ) : error && !data ? (
             <div className="tables-err-msg-container">
-              <p>⚠️ {error}</p>
+              <p>⚠️ Failed to fetch data </p>
             </div>
         ) : !data ? (
             <div className="tables-msg-container">
