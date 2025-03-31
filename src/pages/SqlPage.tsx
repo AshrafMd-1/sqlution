@@ -120,7 +120,7 @@ const SqlPage = () => {
                     />
                   </div>
               ) : (
-                  (commandError || error || !data) ? (
+                  (commandError || error ) ? (
                       <div className="error-container">
                         <h2 className="error-title">⚠️ Failed to load table</h2>
                       </div>

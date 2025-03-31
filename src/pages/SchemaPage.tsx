@@ -1,6 +1,6 @@
 import {useParams} from "react-router";
 import useFetch from "../hooks/useFetch";
-import "./../styles/schemaPage/schemaPage.css";
+import "../styles/schemaPage/SchemaPage.css";
 import {DNA} from "react-loader-spinner";
 
 interface TableMetadata {
