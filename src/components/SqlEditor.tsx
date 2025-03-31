@@ -194,7 +194,7 @@ const SqlEditor = ({onSubmit, query}: SqlEditorProps) => {
                       <li
                           key={index}
                           className="history-item"
-                          onClick={() => insertSQL(query)} // Insert on click
+                          onClick={() => insertSQL(query)}
                       >
                         <pre>{query}</pre>
                       </li>
