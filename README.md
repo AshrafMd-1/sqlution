@@ -1,7 +1,6 @@
 # **Sqlution – SQL Query Editor**
 
-**Live Demo:** [sqlution.netlify.app](https://sqlution.netlify.app)  
-**GitHub Repository:** [github.com/AshrafMd-1/sqlution](https://github.com/AshrafMd-1/sqlution)
+> 📦 **Archived** — This was a frontend-only dummy project built for a frontend take-home assignment during a company interview.
 
 ## **Overview**
 
@@ -101,11 +100,6 @@ This project showcases:
 | **Accessibility**  | 100   |
 | **Best Practices** | 100   |
 | **SEO**            | 82    |
-
-## **Deployment**
-
-- **Hosting:** Netlify
-- **Live Demo:** [sqlution.netlify.app](https://sqlution.netlify.app)
 
 ## **Installation & Running Locally**
 
