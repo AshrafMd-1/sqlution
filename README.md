@@ -4,7 +4,7 @@
 
 ## **Overview**
 
-**Sqlution** is a frontend-based SQL query editor designed to provide an efficient and intuitive experience for writing,
+**Sqlution** is a frontend-based dummy SQL query editor designed to provide an efficient and intuitive experience for writing,
 executing, and managing SQL queries. It incorporates features such as a **syntax-highlighted code editor, an AI-powered
 SQL generator, a schema and table viewer, and a template manager**, ensuring seamless query execution and data
 visualization.
