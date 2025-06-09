@@ -1,7 +1,5 @@
 # **Sqlution – SQL Query Editor**
 
-> 📦 **Archived** — This was a frontend-only dummy project built for a frontend take-home assignment during a company interview.
-
 ## **Overview**
 
 **Sqlution** is a frontend-based dummy SQL query editor designed to provide an efficient and intuitive experience for writing,
