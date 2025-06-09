@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import "../styles/tablesPage/TablesPage.css";
 import TableComponent from "../components/TableDisplayer.tsx";
 import {DNA} from "react-loader-spinner";
-import useFetch from "../hooks/useFetch";
+import useFetch from "../hooks/useFetch.ts";
 import useSidebarStore from "../store/useSidebarStore.ts";
 
 interface TableRow {
