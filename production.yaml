@@ -1,0 +1,7 @@
+services:
+  sport-news:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3003:3000"
