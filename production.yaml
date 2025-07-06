@@ -1,5 +1,5 @@
 services:
-  sport-news:
+  sqlution:
     build:
       context: .
       dockerfile: Dockerfile
