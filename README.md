@@ -1,6 +1,6 @@
 # Sqlution – SQL Query Editor
 
-A frontend SQL query editor built as a **trial project for [Atlan](https://atlan.com)**. Sqlution provides an intuitive interface for writing and executing SQL queries against mock datasets, with AI-powered query generation, a template manager, and a schema/table explorer - all running entirely in the browser.
+A frontend SQL query editor built as a **take-home project for a company interview**. Sqlution provides an intuitive interface for writing and executing SQL queries against mock datasets, with AI-powered query generation, a template manager, and a schema/table explorer - all running entirely in the browser.
 
 ---
 
